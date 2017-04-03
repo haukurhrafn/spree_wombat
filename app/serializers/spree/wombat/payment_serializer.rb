@@ -8,7 +8,7 @@ module Spree
       has_one :source, serializer: Spree::Wombat::SourceSerializer
 
       def payment_method
-        object.payment_method.name
+        object.payment_method.try(:name)
       end
 
       def status
