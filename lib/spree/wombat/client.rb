@@ -47,10 +47,10 @@ module Spree
                 {
                   body: json_payload,
                   headers: {
-                   'Content-Type'       => 'application/json',
-                   'X-Hub-Store'        => Spree::Wombat::Config[:connection_id],
-                   'X-Hub-Access-Token' => Spree::Wombat::Config[:connection_token],
-                   'X-Hub-Timestamp'    => Time.now.utc.to_i.to_s
+                   'Content-Type'        => 'application/json',
+                   'X-User-Access-key'    => Spree::Wombat::Config[:connection_id],
+                   'X-User-Access-Token' => Spree::Wombat::Config[:connection_token],
+                   'X-User-Timestamp'    => Time.now.utc.to_i.to_s
                   }
                 }
               )
@@ -66,7 +66,7 @@ module Spree
       end
 
       def self.validate(res)
-        raise PushApiError, "Push not successful. Wombat returned response code #{res.code} and message: #{res.body}" if res.code != 202
+        raise PushApiError, "Push not successful. Wombat returned response code #{res.code} and message: #{res.body}" unless [200, 202].include?(res.code)
       end
     end
   end
