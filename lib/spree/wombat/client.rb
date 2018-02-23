@@ -48,7 +48,7 @@ module Spree
                   body: json_payload,
                   headers: {
                    'Content-Type'        => 'application/json',
-                   'X-Hub-Access-key'    => Spree::Wombat::Config[:connection_id],
+                   'X-Hub-Store'    => Spree::Wombat::Config[:connection_id],
                    'X-Hub-Access-Token' => Spree::Wombat::Config[:connection_token],
                    'X-Hub-Timestamp'    => Time.now.utc.to_i.to_s
                   }
